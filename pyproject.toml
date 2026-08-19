@@ -1,0 +1,64 @@
+[project]
+dependencies = [
+  "black>=25.1.0",
+  "boto3>=1.40.18",
+  "click>=8.2.1",
+  "diskcache>=5.6.3",
+  "flair>=0.15.1",
+  "hdbscan>=0.8.40",
+  "html2text>=2025.4.15",
+  "humanize>=4.15.0",
+  "imagehash>=4.3.2",
+  "lingua-language-detector>=2.2.0",
+  "llmcompressor>=0.10.0.1",
+  "loguru>=0.7.3",
+  "markdown>=3.10.2",
+  "model2vec[inference]>=0.7.0",
+  "numpy>=1.26,<2.3",
+  "peewee>=3.18.2",
+  "psutil>=7.0.0",
+
+  "pycountry>=26.2.16",
+  "pyicu>=2.16.2",
+  "python-dotenv>=1.1.1",
+  "python-slugify>=8.0.4",
+  "requests>=2.32.5",
+  "tesserocr>=2.10.0",
+  "tiktoken>=0.7.0",
+  "torch>=2.9.0",
+  "torchvision>=0.24.1",
+  "transformers>=4.57.0",
+  "ultralytics>=8.3.240",
+  "vllm ; sys_platform == 'linux'",
+]
+description = ""
+name = "name-of-the-repo"
+readme = "README.md"
+requires-python = ">=3.12"
+version = "0.0.1"
+
+[tool.black]
+line-length = 100
+
+[tool.uv.sources]
+ocroscope = { git = "https://github.com/Pleias/OCRoscope.git" }
+model2vec = { git = "https://github.com/institutional/model2vec", rev = "max_length_is_none" }
+
+[[tool.uv.index]]
+name = "pytorch-cu128"
+url = "https://download.pytorch.org/whl/cu128"
+explicit = true
+
+[[tool.uv.index]]
+name = "vllm-nightly"
+url = "https://wheels.vllm.ai/nightly"
+explicit = true
+
+[tool.uv.sources.torch]
+index = "pytorch-cu128"
+
+[tool.uv.sources.torchvision]
+index = "pytorch-cu128"
+
+[tool.uv.sources.vllm]
+index = "vllm-nightly"

@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>$title</title>
+    <style>
+        :root {
+            --bg: #fafafa;
+            --fg: #1a1a1a;
+            --border: #ddd;
+            --accent: #2563eb;
+            --success: #16a34a;
+            --error: #dc2626;
+            --warning: #ca8a04;
+            --muted: #6b7280;
+            --bar-bg: #7393bc;
+            --bar-fg: #002457;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background: var(--bg);
+            color: var(--fg);
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 24px;
+            line-height: 1.5;
+        }
+
+        h1 {
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        h2 {
+            font-size: 1.1rem;
+            display: inline;
+        }
+
+        .header {
+            margin-bottom: 24px;
+        }
+
+        .badge {
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 2px 10px;
+            border-radius: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .badge-success {
+            background: #dcfce7;
+            color: var(--success);
+        }
+
+        .badge-error {
+            background: #fee2e2;
+            color: var(--error);
+        }
+
+        .badge-warning {
+            background: #fef9c3;
+            color: var(--warning);
+        }
+
+        .dry-run-banner {
+            margin-top: 10px;
+            padding: 8px 14px;
+            background: #fef9c3;
+            border: 1px solid #facc15;
+            border-radius: 6px;
+            font-weight: 600;
+            color: #854d0e;
+        }
+
+        .section {
+            margin-bottom: 20px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .section>summary {
+            padding: 12px 16px;
+            background: #f3f4f6;
+            cursor: pointer;
+            list-style: none;
+        }
+
+        .section>summary::-webkit-details-marker {
+            display: none;
+        }
+
+        .section>summary::before {
+            content: "\25B6";
+            display: inline-block;
+            margin-right: 8px;
+            font-size: 0.7rem;
+            transition: transform 0.15s;
+        }
+
+        .section[open]>summary::before {
+            transform: rotate(90deg);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .env-table,
+        .summary-table {
+            margin: 0;
+        }
+
+        .env-table td,
+        .summary-table td {
+            padding: 5px 16px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .env-table td:first-child,
+        .summary-table td:first-child {
+            font-weight: 600;
+            white-space: nowrap;
+            width: 280px;
+        }
+
+        .env-key {
+            font-family: "SF Mono", "Fira Code", monospace;
+            font-size: 0.9rem;
+        }
+
+        .batch-details {
+            margin: 12px 16px;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+        }
+
+        .batch-details>summary {
+            padding: 8px 12px;
+            background: #f9fafb;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .batch-duration {
+            color: var(--muted);
+            font-size: 0.9rem;
+            margin-left: auto;
+        }
+
+        .step-table {
+            font-size: 0.9rem;
+        }
+
+        .step-table th {
+            text-align: left;
+            padding: 6px 12px;
+            background: #f3f4f6;
+            border-bottom: 2px solid var(--border);
+            font-weight: 600;
+        }
+
+        .step-table td {
+            padding: 5px 12px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .step-name {
+            font-family: "SF Mono", "Fira Code", monospace;
+        }
+
+        .step-logs-cell {
+            padding: 0 12px 4px 24px !important;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .step-logs>summary {
+            cursor: pointer;
+            font-size: 0.8rem;
+            color: var(--muted);
+            padding: 2px 0;
+        }
+
+        .metrics-list {
+            list-style: none;
+            padding: 4px 0 4px 12px;
+            font-size: 0.85rem;
+            color: var(--muted);
+        }
+
+        .metrics-list li::before {
+            content: "\2022";
+            margin-right: 6px;
+        }
+
+        .warn-count {
+            color: var(--warning);
+            font-size: 0.8rem;
+        }
+
+        .hl-metrics-table {
+            margin: 0;
+            font-size: 0.85rem;
+        }
+
+        .hl-metrics-table th {
+            text-align: right;
+            padding: 6px 12px;
+            background: #f3f4f6;
+            border-bottom: 2px solid var(--border);
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        .hl-metrics-table th:first-child {
+            text-align: left;
+        }
+
+        .hl-metrics-table td {
+            padding: 5px 12px;
+            border-bottom: 1px solid var(--border);
+            text-align: right;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .hl-metrics-table td:first-child {
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .hl-metrics-table .totals-row {
+            background: #f9fafb;
+            font-weight: 600;
+        }
+
+        .chart {
+            padding: 16px;
+        }
+
+        .chart-row {
+            display: flex;
+            align-items: center;
+            margin-bottom: 6px;
+        }
+
+        .chart-label {
+            width: 260px;
+            min-width: 260px;
+            font-family: "SF Mono", "Fira Code", monospace;
+            font-size: 0.85rem;
+            text-align: right;
+            padding-right: 12px;
+        }
+
+        .chart-bar-container {
+            flex: 1;
+            background: var(--bar-bg);
+            border-radius: 4px;
+            height: 26px;
+            position: relative;
+        }
+
+        .chart-bar {
+            background: var(--bar-fg);
+            height: 100%;
+            border-radius: 4px;
+            min-width: 2px;
+            display: flex;
+            align-items: center;
+        }
+
+        .chart-value {
+            font-size: 0.8rem;
+            color: #fff;
+            padding-left: 8px;
+            white-space: nowrap;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+        }
+
+        .section>details {
+            margin: 12px 16px;
+        }
+
+        .warn-list,
+        .error-list {
+            list-style: none;
+            padding: 8px 16px;
+            font-size: 0.85rem;
+        }
+
+        .warn-list li,
+        .error-list li {
+            padding: 3px 0;
+            border-bottom: 1px solid var(--border);
+            word-break: break-word;
+        }
+
+        .warn-badge {
+            display: inline-block;
+            background: #fef9c3;
+            color: var(--warning);
+            padding: 0 6px;
+            border-radius: 8px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-right: 4px;
+        }
+
+        .error-item {
+            color: var(--error);
+        }
+
+        .error-badge {
+            display: inline-block;
+            background: #fee2e2;
+            color: var(--error);
+            padding: 0 6px;
+            border-radius: 8px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-right: 4px;
+        }
+
+        .error-list li {
+            color: var(--error);
+        }
+    </style>
+</head>
+
+<body>
+    $body
+</body>
+
+</html>

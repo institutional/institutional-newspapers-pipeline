@@ -1,0 +1,39 @@
+import click
+
+from .step01_cache import step01_cache
+from .step02_crop_detection import step02_crop_detection
+from .step03_crop_ocr_tesseract import step03_crop_ocr_tesseract
+from .step04_crop_ocr_vlm import step04_crop_ocr_vlm
+from .step05_crop_classification_text import step05_crop_classification_text
+from .step06_crop_classification_image import step06_crop_classification_image
+from .step07_crop_classification_final import step07_crop_classification_final
+from .step08_crop_ner import step08_crop_ner
+from .step09_crop_subject import step09_crop_subject
+from .step10_crop_reading_order import step10_crop_reading_order
+from .step11_crop_token_count import step11_crop_token_count
+from .step12_crop_language import step12_crop_language
+from .step13_crop_text_analysis import step13_crop_text_analysis
+from .step14_crop_chronam_thesauri_match import step14_crop_chronam_thesauri_match
+from .step15_crop_embeddings import step15_crop_embeddings
+
+
+@click.group("steps")
+def steps():
+    pass
+
+
+steps.add_command(step01_cache)
+steps.add_command(step02_crop_detection)
+steps.add_command(step03_crop_ocr_tesseract)
+steps.add_command(step04_crop_ocr_vlm)
+steps.add_command(step05_crop_classification_text)
+steps.add_command(step06_crop_classification_image)
+steps.add_command(step07_crop_classification_final)
+steps.add_command(step08_crop_ner)
+steps.add_command(step09_crop_subject)
+steps.add_command(step10_crop_reading_order)
+steps.add_command(step11_crop_token_count)
+steps.add_command(step12_crop_language)
+steps.add_command(step13_crop_text_analysis)
+steps.add_command(step14_crop_chronam_thesauri_match)
+steps.add_command(step15_crop_embeddings)
