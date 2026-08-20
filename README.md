@@ -5,7 +5,7 @@ The [Institutional Data Initiative](https://institutional.org/)'s pipeline for e
 Developed in collaboration with the [Boston Public Library](https://www.bpl.org/), this pipeline segments newspaper scans into individual crops and enriches each crop with OCR, crop-type classification, reading order, named entities, subjects, language detection, and pre-computed embeddings.
 
 **More information:**
-- 📄 [Full analysis available in our technical report](TODO)
+- 📄 [Full analysis available in our technical report](https://arxiv.org/abs/2608.18972)
 
 **See also:**
 - 🗂️ [Institutional Newspapers Collection](https://huggingface.co/collections/institutional/institutional-newspapers)
@@ -692,3 +692,17 @@ The models and the dataset released alongside it carry their own terms; see the 
 [👆 Back to the summary](#summary)
 
 ---
+
+## Cite 
+
+```bibtext
+@misc{cargnelutti2026institutionalnewspaperspipelinederiving,
+      title={Institutional Newspapers Pipeline: Deriving billions of high quality tokens from historical newspapers}, 
+      author={Matteo Cargnelutti and Catherine Brobston and Eben English and Jake Sadow and Kacie Bailey and Greg Leppert and Amanda Watson and Jessica Chapel and Jonathan Zittrain},
+      year={2026},
+      eprint={2608.18972},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/2608.18972}, 
+}
+```
